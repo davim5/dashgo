@@ -1,10 +1,15 @@
-import { Text, Box, Flex, Heading, Button, Icon, Table, Thead, Tr, Th, Checkbox, Tbody, Td } from "@chakra-ui/react";
+import { Text, Box, Flex, Heading, Button, Icon, Table, Thead, Tr, Th, Checkbox, Tbody, Td, useBreakpointValue } from "@chakra-ui/react";
 import { RiAddLine, RiPencilLine } from "react-icons/ri";
 import { Header } from "../../components/Header";
 import { Pagination } from "../../components/Pagination";
 import { Sidebar } from "../../components/Sidebar";
 
 export default function UserList() {
+    const isWideVersion = useBreakpointValue({
+        base: false,
+        lg: true,
+    })
+
     return(
         <Box>
             <Header/>
@@ -29,17 +34,17 @@ export default function UserList() {
                     <Table colorScheme="whiteAlpha">
                         <Thead>
                             <Tr>
-                                <Th px="6" color="gray.300" width="8">
+                                <Th px={["4","4","6"]} color="gray.300" width="8">
                                     <Checkbox colorScheme="pink"/>
                                 </Th>
                                 <Th>Usuário</Th>
-                                <Th>Data de cadastro</Th>
+                              { isWideVersion && <Th>Data de cadastro</Th>}
                                 <Th w="8"/>
                             </Tr>
                         </Thead>
                         <Tbody>
                             <Tr>
-                                <Td p="6">
+                                <Td p={["4","4","6"]}>
                                     <Checkbox colorScheme="pink"/>
                                 </Td>
                                 <Td>
@@ -48,7 +53,7 @@ export default function UserList() {
                                         <Text fontSize="sm" color="gray.300">davim53@hotmail.com</Text>
                                     </Box>
                                 </Td>
-                                <Td>04 de Abril, 2021</Td>
+                                {isWideVersion && <Td>04 de Abril, 2021</Td>}
                                 <Td>
                                     <Button
                                     as="a" 
@@ -57,7 +62,53 @@ export default function UserList() {
                                     colorScheme="purple"
                                     leftIcon={<Icon as={RiPencilLine} fontSize="16"></Icon>}
                                     >
-                                        Editar
+                                        { isWideVersion && "Editar"}
+                                    </Button>
+                                </Td>
+                            </Tr>
+                            <Tr>
+                                <Td p={["4","4","6"]}>
+                                    <Checkbox colorScheme="pink"/>
+                                </Td>
+                                <Td>
+                                    <Box>
+                                        <Text fontWeight="bold">Davi Lima</Text>
+                                        <Text fontSize="sm" color="gray.300">davim53@hotmail.com</Text>
+                                    </Box>
+                                </Td>
+                                {isWideVersion && <Td>04 de Abril, 2021</Td>}
+                                <Td>
+                                    <Button
+                                    as="a" 
+                                    size="sm" 
+                                    fontSize="sm" 
+                                    colorScheme="purple"
+                                    leftIcon={<Icon as={RiPencilLine} fontSize="16"></Icon>}
+                                    >
+                                        { isWideVersion && "Editar"}
+                                    </Button>
+                                </Td>
+                            </Tr>
+                            <Tr>
+                                <Td p={["4","4","6"]}>
+                                    <Checkbox colorScheme="pink"/>
+                                </Td>
+                                <Td>
+                                    <Box>
+                                        <Text fontWeight="bold">Davi Lima</Text>
+                                        <Text fontSize="sm" color="gray.300">davim53@hotmail.com</Text>
+                                    </Box>
+                                </Td>
+                                {isWideVersion && <Td>04 de Abril, 2021</Td>}
+                                <Td>
+                                    <Button
+                                    as="a" 
+                                    size="sm" 
+                                    fontSize="sm" 
+                                    colorScheme="purple"
+                                    leftIcon={<Icon as={RiPencilLine} fontSize="16"></Icon>}
+                                    >
+                                        { isWideVersion && "Editar"}
                                     </Button>
                                 </Td>
                             </Tr>
