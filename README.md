@@ -1,85 +1,46 @@
-# Configurando React Query
+# Configurando DevTools
 
-# Instalação
+- Importar
+- Jogar dentro do QueryClientProvider.
 
-- Instalação simples
+# Usando
 
-```tsx
-yarn add react-query
-```
+- Vai a aparecer uma nova aba na aplicação! (Símbolo do React Query)
+- Um novo console
+- Mostra query que foi feita.
+- Possível ver todos os dados retornados
+- Todas as informações adicionais da query.
 
-# useQuery
+## Refetch
 
-- Hook para fazermos as requisições no backend
+- Recarrega os dados
 
-# Requisição
+## Reset
 
-- Passar um nome
-    - Vai ser o nome do cache. (chave que vai ser armazenada em cache)
+- Joga o cache fora e carrega novamente
 
-```tsx
-import { useQuery } from 'react-query';
+## Remove
 
-export default function UserList() {
-    const { data, isLoading, error } = useQuery('users', async () => {
-        const response = await fetch('http://localhost:3000/api/users')
-        const data = await response.json();
+- Remove o cache.
 
-        return data;
-    });
-```
+## Invalidade
 
-# Provider
+- Faz um refetch por padrão. Torna o cache obsoleto.
 
-- Precisa colocar um provider em volta da a aplicação (_app).
+# Estados
 
-```tsx
-import { AppProps } from 'next/app';
-import { ChakraProvider } from '@chakra-ui/react';
-import { theme } from '../styles/theme';
-import { SidebarDrawerProvider } from '../contexts/SidebarDrawerContext';
-import { makeServer } from '../services/mirage';
-import { QueryClient, QueryClientProvider } from 'react-query';
+## Stale
 
-if(process.env.NODE_ENV === 'development'){
-  makeServer();
-}
+- Obsoleto
+- Indica que próxima vez que usuário der foco na tela ou sair e voltar, o react query fará uma nova requisição da API.
 
-const queryClient = new QueryClient();
+## Fetching
 
-function MyApp({ Component, pageProps }:AppProps) {
-  return (
-    <QueryClientProvider client={ queryClient }>
-      <ChakraProvider resetCSS theme={ theme }>
-        <SidebarDrawerProvider>
-          <Component {...pageProps} />
-        </SidebarDrawerProvider>
-      </ChakraProvider>
-    </QueryClientProvider>
-  ) 
-}
+- Processo está no meio do carregamento.
 
-export default MyApp
-```
+## Fresh
 
-# Loading
+- Dado recente
+- Não precisa ser recarregado dentro deu um certo período.
 
-- Feito com um encadeamento de if ternário para caso de erros.
-
-```tsx
-{isLoading ? (
-    <Flex justify="center">
-        <Spinner/>
-    </Flex>
-) : error ? (
-    <Flex justify="center">
-        <Text>Falha ao obter os dados dos usuários</Text>
-    </Flex>
-) : (
-    <>
-      <Table colorScheme="whiteAlpha">
-      ....
-      </Table>
-      <Pagination/>
-    </>
-```
+##
